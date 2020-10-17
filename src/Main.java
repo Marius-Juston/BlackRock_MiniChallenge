@@ -18,7 +18,7 @@ public class Main {
 				int clr = image.getRGB(x, y);
 
 				int newRed = (clr & 0x00ff0000) >> 16;
-				int lestSig = newRed & 0b1;
+				int lestSig = newRed & 0b11;
 				newRed = (lestSig) * 0xff;
 
 				int newGreen = newRed;
