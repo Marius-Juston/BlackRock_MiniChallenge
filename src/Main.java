@@ -6,10 +6,23 @@ import javax.imageio.ImageIO;
 /**
  * @author Marius Juston
  **/
-public class Main {
+public final class Main {
+
+	public static final String INPUT_IMAGE = "src/imageEmbedded.png";
+	public static final String OUTPUT_IMAGE = "src/output.png";
 
 	public static void main(String[] args) throws IOException {
-		BufferedImage image = readImage("src/imageEmbedded.png");
+		BufferedImage image = readImage(INPUT_IMAGE);
+		BufferedImage bufferedImage = extractHiddenImage(image);
+
+		ImageIO.write(bufferedImage, "png", new File(OUTPUT_IMAGE));
+	}
+
+	private static BufferedImage readImage(String fileLocation) throws IOException {
+		return ImageIO.read(new File(fileLocation));
+	}
+
+	private static BufferedImage extractHiddenImage(BufferedImage image) {
 
 		BufferedImage bufferedImage = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
 
@@ -30,11 +43,7 @@ public class Main {
 			}
 		}
 
-		ImageIO.write(bufferedImage, "png", new File("output.png"));
-	}
-
-	static BufferedImage readImage(String fileLoc) throws IOException {
-		return ImageIO.read(new File(fileLoc));
+		return bufferedImage;
 	}
 
 }
